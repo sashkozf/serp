@@ -1,0 +1,23 @@
+import telegram
+import asyncio
+
+bot_token = '5968492943:AAFYz21nADN4wDj8jXya8VIdTmykFCfzEN4'
+chat_ids = ["403678902", "343862506"]
+
+async def send_message(chat_id):
+    # Create an instance of the Telegram bot API
+    bot = telegram.Bot(token=bot_token)
+
+    # Send a message to the user
+    message = await bot.send_message(chat_id=chat_id, text='Привіт! Я тепер розумніший за Google. Я буду аналізувати всю інформацію і надсилати найновішу в крутецькому форматі. Туц.')
+
+    # Check if the message was delivered
+    if message:
+        print('The message was delivered.')
+    else:
+        print('The message was not delivered.')
+
+loop = asyncio.get_event_loop()
+
+tasks = [send_message(chat_id) for chat_id in chat_ids]
+loop.run_until_complete(asyncio.gather(*tasks))
